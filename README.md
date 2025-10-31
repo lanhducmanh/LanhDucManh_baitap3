@@ -26,6 +26,15 @@ lành đức mạnh-k215480106108
 #### 3.2.1 Cài đặt Node-RED 
 <img width="1858" height="1021" alt="image" src="https://github.com/user-attachments/assets/5054b569-c8a6-4ac4-bcb2-4825da567bda" />
 #### 3.2.2 Cấu hình Node-RED để nhận dữ liệu cảm biến
+<img width="1888" height="1013" alt="image" src="https://github.com/user-attachments/assets/c6b35582-b852-4ace-9fe0-b201d75b6f7a" /> 
+<img width="1210" height="766" alt="image" src="https://github.com/user-attachments/assets/9fa547b5-e91f-489a-91cb-1f631300dbb6" /> 
+#### 3.2.3 Tạo thêm /get-sensor-history 
+<img width="1888" height="756" alt="image" src="https://github.com/user-attachments/assets/2f062f2c-612a-46b4-9469-9f8c52084947" /> 
+<img width="838" height="831" alt="image" src="https://github.com/user-attachments/assets/7e199fb5-3540-4baf-b5ca-c63ae26dc1ed" /> 
+#### 3.2.3 Lưu “giá trị mới nhất” vào MariaDB + dùng MariaDB cho /get-sensor-data
+
+
+
 
 
 
