@@ -23,15 +23,14 @@ lành đức mạnh-k215480106108
 <img width="772" height="638" alt="image" src="https://github.com/user-attachments/assets/b8bcd552-00e3-460d-bbae-a8551792e0b7" /> 
 
 ### 3.2  Backend (Node-RED) 
-#### 3.2.1 Cài đặt Node-RED 
-<img width="1858" height="1021" alt="image" src="https://github.com/user-attachments/assets/5054b569-c8a6-4ac4-bcb2-4825da567bda" />
-#### 3.2.2 Cấu hình Node-RED để nhận dữ liệu cảm biến
-<img width="1888" height="1013" alt="image" src="https://github.com/user-attachments/assets/c6b35582-b852-4ace-9fe0-b201d75b6f7a" /> 
-<img width="1210" height="766" alt="image" src="https://github.com/user-attachments/assets/9fa547b5-e91f-489a-91cb-1f631300dbb6" /> 
-#### 3.2.3 Tạo thêm /get-sensor-history 
-<img width="1888" height="756" alt="image" src="https://github.com/user-attachments/assets/2f062f2c-612a-46b4-9469-9f8c52084947" /> 
-<img width="838" height="831" alt="image" src="https://github.com/user-attachments/assets/7e199fb5-3540-4baf-b5ca-c63ae26dc1ed" /> 
-#### 3.2.3 Lưu “giá trị mới nhất” vào MariaDB + dùng MariaDB cho /get-sensor-data
+#### 3.2.1  Node-RED
+<img width="1820" height="980" alt="image" src="https://github.com/user-attachments/assets/09a9cc69-953c-4d47-81e5-97e28dabfa29" /> 
+<img width="1862" height="862" alt="image" src="https://github.com/user-attachments/assets/7ac12fb6-a694-479c-87be-8e996917c757" />
+#### 3.2.2 MariaDB (giá trị mới nhất) 
+<img width="1827" height="939" alt="image" src="https://github.com/user-attachments/assets/ee912487-bd3f-4026-b74b-46d0b51ddf04" /> 
+#### 3.2.3 Frontend (SPA 1 file) 
+
+
 
 
 
