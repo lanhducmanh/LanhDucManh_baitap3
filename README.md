@@ -10,25 +10,17 @@ lành đức mạnh-k215480106108
 <img width="968" height="519" alt="image" src="https://github.com/user-attachments/assets/3fb49d34-2e2d-420b-9dbd-e2c2b3245907" />
 ## 2 cấu hình Docker Compose
 ### 2.1 Tạo một file docker-compose.yml và file ginx.conf 
-<img width="877" height="448" alt="image" src="https://github.com/user-attachments/assets/52ea4881-0081-4280-b5a7-8c17b3b80396" />
-<img width="1663" height="921" alt="image" src="https://github.com/user-attachments/assets/5a7c3202-5abc-4272-99b8-479e1da83052" />
-<img width="1386" height="825" alt="image" src="https://github.com/user-attachments/assets/db633619-91c7-4c64-8c24-0bdf7bca9811" /> 
-
+<img width="806" height="434" alt="image" src="https://github.com/user-attachments/assets/2794093e-8e50-4f40-b664-627b4013f1c6" />
 ### 2.2 Khởi động Docker Compose: 
-<img width="1381" height="419" alt="image" src="https://github.com/user-attachments/assets/a39bcaa2-71f1-4578-8a62-9e8b2ee660e1" />  
+<img width="1516" height="372" alt="image" src="https://github.com/user-attachments/assets/37ebdb46-4d50-4f9e-8a45-d8ffb57362df" />
+## 3 Lập trình 
+### 3.1 TẠO DỮ LIỆU BAN ĐẦU
+<img width="1829" height="874" alt="image" src="https://github.com/user-attachments/assets/a0ec71d6-fcfb-41ef-82b8-76e417679689" /> 
+### 3.2 TẠO FLOW TRONG NODE-RED 
+<img width="1511" height="866" alt="image" src="https://github.com/user-attachments/assets/aa5a3ddd-1582-43d3-b734-a2896c2f7b6a" />
+<img width="1483" height="713" alt="image" src="https://github.com/user-attachments/assets/76cb678b-13bb-4613-b48b-a6cfc39b6fa3" /> 
 
-## 3 Lập trình Web Frontend + Backend 
-### 3.1 Tạo tệp index.html 
-<img width="869" height="608" alt="image" src="https://github.com/user-attachments/assets/24780ebd-48b5-4200-9740-1364e499138e" /> 
-<img width="772" height="638" alt="image" src="https://github.com/user-attachments/assets/b8bcd552-00e3-460d-bbae-a8551792e0b7" /> 
 
-### 3.2  Backend (Node-RED) 
-#### 3.2.1  Node-RED
-<img width="1820" height="980" alt="image" src="https://github.com/user-attachments/assets/09a9cc69-953c-4d47-81e5-97e28dabfa29" /> 
-<img width="1862" height="862" alt="image" src="https://github.com/user-attachments/assets/7ac12fb6-a694-479c-87be-8e996917c757" />
-#### 3.2.2 MariaDB (giá trị mới nhất) 
-<img width="1827" height="939" alt="image" src="https://github.com/user-attachments/assets/ee912487-bd3f-4026-b74b-46d0b51ddf04" /> 
-#### 3.2.3 Frontend (SPA 1 file) 
 
 
 
