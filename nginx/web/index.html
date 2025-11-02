@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Giám sát IoT</title>
+  <style>
+    :root{
+      --bg-1:#0f1020; --bg-2:#111a2b; --card:#0f172a99; --card-solid:#0f172a;
+      --text:#e6edf6; --muted:#9fb0c7; --accent:#5eead4; --accent-2:#60a5fa; --danger:#fb7185; --ok:#34d399;
+      --ring: 0 0 0 2px #ffffff1a, 0 0 30px #00000022 inset;
+    }
+    .light{
+      --bg-1:#f7f9fc; --bg-2:#eef2f8; --card:#ffffffcc; --card-solid:#ffffff;
+      --text:#0b1220; --muted:#5e6b85; --accent:#0ea5e9; --accent-2:#22c55e; --danger:#e11d48; --ok:#16a34a;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font:16px/1.4 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial;
+      color:var(--text);
+      background: radial-gradient(1000px 700px at 15% -10%, #4f46e5 0%, transparent 60%),
+                  radial-gradient(900px 600px at 110% 0%, #06b6d4 0%, transparent 55%),
+                  linear-gradient(180deg, var(--bg-1), var(--bg-2));
+      background-attachment: fixed;
+    }
+    .container{max-width:1100px; margin:0 auto; padding:28px 18px 40px}
+    header{display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:20px}
+    .brand{display:flex; align-items:center; gap:12px}
+    .logo{width:44px; height:44px; border-radius:12px;
+      background:linear-gradient(135deg, var(--accent), var(--accent-2)); box-shadow:0 10px 25px #0003; position:relative}
+    .logo::after{content:""; position:absolute; inset:6px; border-radius:8px; background:#fff2; box-shadow:inset 0 0 12px #0003, inset 0 0 2px #0003}
+    h1{font-size:22px; margin:0}
+    .sub{color:var(--muted); font-size:14px; margin-top:2px}
+    .actions{display:flex; gap:10px; flex-wrap:wrap}
+    button,.seg{border:0; border-radius:12px; padding:10px 14px; color:var(--text); background:var(--card); backdrop-filter:blur(8px);
+      box-shadow:var(--ring); cursor:pointer; transition:transform .08s ease, background .2s ease}
+    button:hover{transform:translateY(-1px)} button:active{transform:translateY(0)}
+    .primary{background:linear-gradient(135deg, var(--accent), var(--accent-2)); color:#071018; font-weight:700}
+    .seg{display:inline-flex; gap:2px; padding:4px; background:#fff2; border-radius:12px}
+    .seg button{padding:8px 12px; background:transparent}
+    .seg .on{background:#fff2; border-radius:10px}
+
+    .grid{display:grid; grid-template-columns:repeat(12,1fr); gap:16px}
+    .card{grid-column:span 12; background:var(--card); border-radius:18px; padding:18px; backdrop-filter:blur(8px); box-shadow:var(--ring)}
+    @media (min-width:800px){ .card.kpi{grid-column:span 4} .card.graf{grid-column:span 12} }
+
+    .kpi-head{display:flex; align-items:center; justify-content:space-between; margin-bottom:10px}
+    .muted{color:var(--muted); font-size:13px}
+    .value{font-size:32px; font-weight:800; letter-spacing:.2px}
+    .status{display:inline-flex; align-items:center; gap:8px; padding:6px 10px; border-radius:999px; background:#fff2}
+    .dot{width:8px; height:8px; border-radius:999px; background:var(--ok); box-shadow:0 0 0 3px #10b98133}
+    .dot.err{background:var(--danger); box-shadow:0 0 0 3px #ef444433}
+
+    .gauge{--val:0; --color:var(--accent); width:110px; height:110px; position:relative; border-radius:50%;
+      background:conic-gradient(var(--color) calc(var(--val)*1%), #ffffff12 0);
+      display:grid; place-items:center; margin-right:14px; box-shadow:inset 0 0 20px #0003, 0 8px 20px #0004}
+    .gauge::after{content:""; position:absolute; width:78px; height:78px; border-radius:50%; background:var(--card-solid); box-shadow:inset 0 0 14px #0006}
+    .gauge .lbl{position:relative; z-index:1; font-weight:800; font-size:18px}
+    .kpi-body{display:flex; align-items:center}
+    .stack{display:flex; flex-direction:column; gap:4px}
+    .hint{font-size:12px; color:var(--muted)}
+    .row{display:flex; align-items:center; gap:10px; flex-wrap:wrap}
+    .time{font-size:13px; color:var(--muted)}
+    .spacer{flex:1}
+
+    iframe{width:100%; height:460px; border:0; border-radius:14px; background:#0b1220; box-shadow:inset 0 0 18px #0008}
+    .loader{width:22px; height:22px; border-radius:999px; border:3px solid #fff3; border-top-color:#fffC; animation:rot .9s linear infinite}
+    @keyframes rot{to{transform:rotate(360deg)}}
+    .footer{margin-top:22px; text-align:center; color:var(--muted); font-size:13px}
+    .badge{display:inline-flex; align-items:center; gap:8px; background:#ffffff14; padding:8px 12px; border-radius:999px}
+    .badge i{width:8px; height:8px; border-radius:999px; background:var(--ok)}
+    .badge i.red{background:var(--danger)}
+    .toast{position:fixed; right:18px; bottom:18px; display:flex; gap:10px; background:var(--card); color:var(--text);
+      padding:12px 14px; border-radius:14px; box-shadow:var(--ring); opacity:0; transform:translateY(8px); transition:all .25s ease}
+    .toast.show{opacity:1; transform:translateY(0)}
+  </style>
+
+  <script defer>
+  (function(){
+    const $ = s => document.querySelector(s);
+    const apiUrl = window.location.origin + '/nodered/api/latest';
+
+    // ==== 1) BIẾN DOM & TOAST: đặt lên TRÊN CÙNG ====
+    const toastEl = document.createElement('div');
+    toastEl.className = 'toast';
+    toastEl.id = 'toast';
+    toastEl.innerHTML = '<span id="toastMsg">Thông báo</span>';
+    document.addEventListener('DOMContentLoaded', ()=> document.body.appendChild(toastEl));
+    const toastMsg = () => $('#toastMsg');  // lấy động sau khi DOM ready
+
+    function toast(msg){
+      const el = $('#toast'); if(!el) return;
+      const m = toastMsg(); if(m) m.textContent = msg;
+      el.classList.add('show'); setTimeout(()=>el.classList.remove('show'), 1800);
+    }
+
+    // ==== 2) STATE, THIẾT LẬP CHUNG ====
+    const state = { unit:'C', timer:null, intMs:5000, last:null };
+
+    function setTheme(t){
+      if(t==='light') document.body.classList.add('light'); else document.body.classList.remove('light');
+      localStorage.setItem('theme', t);
+    }
+
+    function cToF(c){ return c*9/5 + 32; }
+    function asTemp(t){ return state.unit==='F' ? `${cToF(+t).toFixed(1)}°F` : `${(+t).toFixed(1)}°C`; }
+    function gauge(el,p){ if(!el) return; const v=Math.max(0,Math.min(100,p)); el.style.setProperty('--val', v); }
+
+    function setConn(ok){
+      const b = $('#connBadge'); if(!b) return;
+      const dot = b.querySelector('i');
+      if(dot){ dot.classList.toggle('red', !ok); }
+      const strong = b.querySelector('b'); if(strong) strong.textContent = ok ? 'ONLINE' : 'OFFLINE';
+    }
+
+    function render(){
+      if(!state.last) return;
+      const t = Number(state.last.temperature), h = Number(state.last.humidity);
+      const tempLbl = $('#tempLbl'), humLbl = $('#humLbl');
+      const tempVal = $('#tempVal'), humVal = $('#humVal');
+      if(tempLbl) tempLbl.textContent = asTemp(t);
+      if(tempVal) tempVal.textContent = tempLbl.textContent;
+      if(humLbl) humLbl.textContent = h.toFixed(0)+'%';
+      if(humVal) humVal.textContent = humLbl.textContent;
+
+      gauge($('#gTemp'), Math.max(0,Math.min(50,t))/50*100);
+      gauge($('#gHum'), Math.max(0,Math.min(100,h)));
+
+      const tOk=(t>=18&&t<=28), hOk=(h>=40&&h<=70);
+      const dotT=$('#dotTemp'), labT=$('#labTempStatus'), dotH=$('#dotHum'), labH=$('#labHumStatus');
+      if(dotT) dotT.classList.toggle('err', !tOk);
+      if(labT) labT.textContent = tOk?'OK':'CẢNH BÁO';
+      if(dotH) dotH.classList.toggle('err', !hOk);
+      if(labH) labH.textContent = hOk?'OK':'CẢNH BÁO';
+    }
+
+    async function load(){
+      const spin = $('#spin');
+      try{
+        if(spin) spin.style.display='inline-block';
+        const res = await fetch(apiUrl, {cache:'no-store'});
+        setConn(res.ok);
+
+        const ctype = res.headers.get('content-type')||'';
+        if(!res.ok) throw new Error(`HTTP ${res.status}`);
+        if(!ctype.includes('application/json')){
+          const text = await res.text();
+          throw new Error('Không phải JSON (có thể bị redirect). ' + text.slice(0,120));
+        }
+        const data = await res.json();
+        state.last = data;
+        const lt = $('#lastTime'); if(lt) lt.textContent = 'Cập nhật: ' + new Date().toLocaleString();
+        render();
+      }catch(err){
+        setConn(false);
+        toast('Không tải được dữ liệu: ' + err.message);
+        console.warn('[API lỗi]', err);
+      }finally{
+        if(spin) spin.style.display='none';
+      }
+    }
+
+    function setIntervalMs(ms){
+      state.intMs = ms;
+      if(state.timer) clearInterval(state.timer);
+      state.timer = setInterval(load, ms);
+      toast(`Auto refresh: ${ms/1000}s`);
+    }
+
+    // ==== 3) EVENT HANDLERS (sau khi DOM có) ====
+    document.addEventListener('DOMContentLoaded', ()=>{
+      // theme
+      setTheme(localStorage.getItem('theme')||'dark');
+      $('#btnLight')?.addEventListener('click', ()=>{ setTheme('light'); $('#btnLight').classList.add('on'); $('#btnDark').classList.remove('on'); });
+      $('#btnDark')?.addEventListener('click', ()=>{ setTheme('dark');  $('#btnDark').classList.add('on');  $('#btnLight').classList.remove('on'); });
+
+      // unit
+      $('#btnC')?.addEventListener('click', ()=>{ state.unit='C'; $('#btnC').classList.add('on'); $('#btnF').classList.remove('on'); render(); });
+      $('#btnF')?.addEventListener('click', ()=>{ state.unit='F'; $('#btnF').classList.add('on'); $('#btnC').classList.remove('on'); render(); });
+
+      // refresh
+      $('#btnRefresh')?.addEventListener('click', ()=> load());
+
+      // interval buttons
+      document.querySelectorAll('[data-int]').forEach(btn=>{
+        btn.addEventListener('click', ()=> setIntervalMs(+btn.getAttribute('data-int')*1000));
+      });
+
+      document.addEventListener('keydown', (e)=>{
+        if(e.key==='3') setIntervalMs(3000);
+        if(e.key==='5') setIntervalMs(5000);
+        if(e.key==='1'||e.key==='0') setIntervalMs(10000);
+      });
+
+      // init
+      const yy = $('#yy'); if(yy) yy.textContent = new Date().getFullYear();
+      setIntervalMs(5000);
+      load();
+
+      // grafana loader
+      $('#graf')?.addEventListener('load', ()=>{ const g=$('#gload'); if(g) g.style.display='none'; });
+    });
+  })();
+  </script>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        <div>
+          <h1>Giám sát IoT</h1>
+          <div class="sub">Nhiệt độ &amp; Độ ẩm theo thời gian thực – Node-RED / InfluxDB / Grafana</div>
+        </div>
+      </div>
+      <div class="actions">
+        <div class="seg" aria-label="Theme">
+          <button id="btnLight">Light</button>
+          <button id="btnDark" class="on">Dark</button>
+        </div>
+        <div class="seg" aria-label="Unit">
+          <button id="btnC" class="on">°C</button>
+          <button id="btnF">°F</button>
+        </div>
+        <button id="btnRefresh" class="primary">Refresh</button>
+      </div>
+    </header>
+
+    <section class="row" style="margin-bottom:10px">
+      <div class="badge" id="connBadge"><i></i><span>Kết nối: <b>—</b></span></div>
+      <div class="spacer"></div>
+      <div class="time" id="lastTime">Chưa cập nhật</div>
+    </section>
+
+    <section class="grid">
+      <article class="card kpi">
+        <div class="kpi-head">
+          <div class="muted">Nhiệt độ</div>
+          <div class="status"><span class="dot" id="dotTemp"></span><span id="labTempStatus">—</span></div>
+        </div>
+        <div class="kpi-body">
+          <div class="gauge" id="gTemp" style="--val:0;--color:var(--accent)"><div class="lbl" id="tempLbl">--°C</div></div>
+          <div class="stack">
+            <div class="value" id="tempVal">--</div>
+            <div class="hint">Ngưỡng an toàn: 18–28°C</div>
+            <div class="hint"><code>/nodered/api/latest</code></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="card kpi">
+        <div class="kpi-head">
+          <div class="muted">Độ ẩm</div>
+          <div class="status"><span class="dot" id="dotHum"></span><span id="labHumStatus">—</span></div>
+        </div>
+        <div class="kpi-body">
+          <div class="gauge" id="gHum" style="--val:0;--color:var(--accent-2)"><div class="lbl" id="humLbl">--%</div></div>
+          <div class="stack">
+            <div class="value" id="humVal">--</div>
+            <div class="hint">Tham chiếu: 40–70%</div>
+            <div class="hint">Tự động cập nhật</div>
+          </div>
+        </div>
+      </article>
+
+      <article class="card kpi">
+        <div class="kpi-head"><div class="muted">Điều khiển</div></div>
+        <div class="kpi-body" style="gap:14px">
+          <div class="stack" style="min-width:210px">
+            <div class="muted">Tự động cập nhật</div>
+            <div class="row">
+              <button class="seg" data-int="3">3s</button>
+              <button class="seg" data-int="5">5s</button>
+              <button class="seg" data-int="10">10s</button>
+            </div>
+            <div class="hint">Bấm 3 / 5 / 0 để đổi chu kỳ</div>
+          </div>
+          <div class="spacer"></div>
+          <div class="row"><div class="loader" id="spin" title="Đang tải" style="display:none"></div></div>
+        </div>
+      </article>
+
+      <article class="card graf">
+        <div class="kpi-head">
+          <div><div class="muted">Lịch sử</div><div class="value" style="font-size:22px">Biểu đồ Grafana</div></div>
+          <div class="row"><div class="loader" id="gload"></div><span class="muted">Đang tải dashboard…</span></div>
+        </div>
+        <div><iframe id="graf" src="/grafana" loading="lazy" title="Grafana Dashboard"></iframe></div>
+      </article>
+    </section>
+
+    <div class="footer">© <span id="yy"></span> IoT Monitor · Node-RED · InfluxDB · Grafana · Nginx</div>
+  </div>
+</body>
+</html>

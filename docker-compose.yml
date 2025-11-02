@@ -1,0 +1,96 @@
+version: "3.9"
+
+services:
+  mariadb:
+    image: mariadb:10.11
+    container_name: mariadb
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_DATABASE: webapp
+      MYSQL_USER: appuser
+      MYSQL_PASSWORD: apppass
+    ports:
+      - "3306:3306"
+    volumes:
+      - mariadb_data:/var/lib/mysql
+    networks:
+      - iotnet
+
+  phpmyadmin:
+    image: phpmyadmin:5
+    container_name: phpmyadmin
+    restart: unless-stopped
+    environment:
+      PMA_HOST: mariadb
+      PMA_USER: root
+      PMA_PASSWORD: rootpass
+    ports:
+      - "8080:80"
+    depends_on:
+      - mariadb
+    networks:
+      - iotnet
+
+  nodered:
+    image: nodered/node-red:3.1
+    container_name: nodered
+    restart: unless-stopped
+    ports:
+      - "1880:1880"
+    volumes:
+      - nodered_data:/data
+    networks:
+      - iotnet
+
+  influxdb:
+    image: influxdb:1.8
+    container_name: influxdb
+    restart: unless-stopped
+    ports:
+      - "8086:8086"
+    volumes:
+      - influx_data:/var/lib/influxdb
+    networks:
+      - iotnet
+
+  grafana:
+    image: grafana/grafana:10.0.0
+    container_name: grafana
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SERVER_ROOT_URL=%(protocol)s://%(domain)s/grafana/
+      - GF_SERVER_SERVE_FROM_SUB_PATH=true
+    depends_on:
+      - influxdb
+    networks:
+      - iotnet
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      # HTML (thư mục web của bạn)
+      - C:/Users/AD-MIN/iot-web/nginx/web:/usr/share/nginx/html:ro
+      # Thư mục conf.d (dùng default.conf ở dưới)
+      - C:/Users/AD-MIN/iot-web/nginx/conf.d:/etc/nginx/conf.d:ro
+      # (KHÔNG mount /etc/nginx/nginx.conf để dùng mặc định của image)
+    depends_on:
+      - nodered
+      - grafana
+    networks:
+      - iotnet
+
+networks:
+  iotnet:
+
+volumes:
+  mariadb_data:
+  nodered_data:
+  influx_data:
