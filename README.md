@@ -21,22 +21,17 @@ lành đức mạnh-k215480106108
 ## 3 LẬP TRÌNH BACKEND (NODE-RED) 
 <img width="1898" height="787" alt="image" src="https://github.com/user-attachments/assets/838d3206-23bc-402a-9c5a-6585c59399c0" /> 
 
-<img width="1250" height="641" alt="image" src="https://github.com/user-attachments/assets/390eec9b-a96d-4b3e-b359-3c644717db26" /> 
-
-<img width="859" height="738" alt="image" src="https://github.com/user-attachments/assets/80fa3e70-6459-42b5-993f-ba96e5d41a79" /> 
-
 ## 4 FRONTEND (index.html) 
 <img width="1777" height="849" alt="image" src="https://github.com/user-attachments/assets/b638b751-d36c-468f-bb88-85fa2d464a57" /> 
 
 <img width="977" height="806" alt="image" src="https://github.com/user-attachments/assets/f43aa3bc-6e51-40ef-9175-184ce145383c" />
-
-<img width="859" height="738" alt="image" src="https://github.com/user-attachments/assets/80fa3e70-6459-42b5-993f-ba96e5d41a79" /> 
 
 ## 5 LOGIN + SESSION 
 
 <img width="851" height="734" alt="image" src="https://github.com/user-attachments/assets/85d55d25-9706-46a4-b151-54164c97e281" />
 
 ## 6  GRAFANA DASHBOARD 
+
 <img width="856" height="897" alt="image" src="https://github.com/user-attachments/assets/699d9879-be8c-4a9f-b8d1-24fd1102526a" />
 
  
