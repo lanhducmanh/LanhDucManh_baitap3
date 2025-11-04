@@ -15,8 +15,7 @@ lành đức mạnh-k215480106108
 ### 1.4 Sử dụng 1 file docker-compose.yml để cài đặt các docker container
 <img width="1853" height="990" alt="image" src="https://github.com/user-attachments/assets/d0c677ab-03ee-4e40-a916-0ef041c4b966" /> 
 
-## 2 cấu hình Docker Compose
-### 2.1 TẠO THƯ MỤC & FILE  
+## 2 TẠO THƯ MỤC & FILE  
 <img width="1217" height="707" alt="image" src="https://github.com/user-attachments/assets/ab7067ce-7371-4e09-9981-f8f14ec48593" /> 
 
 ## 3 LẬP TRÌNH BACKEND (NODE-RED) 
@@ -29,14 +28,17 @@ lành đức mạnh-k215480106108
 ## 4 FRONTEND (index.html) 
 <img width="1777" height="849" alt="image" src="https://github.com/user-attachments/assets/b638b751-d36c-468f-bb88-85fa2d464a57" /> 
 
+<img width="977" height="806" alt="image" src="https://github.com/user-attachments/assets/f43aa3bc-6e51-40ef-9175-184ce145383c" />
+
 <img width="859" height="738" alt="image" src="https://github.com/user-attachments/assets/80fa3e70-6459-42b5-993f-ba96e5d41a79" /> 
 
-## 5 LOGIN + SESSION
+## 5 LOGIN + SESSION 
 
-<img width="856" height="893" alt="image" src="https://github.com/user-attachments/assets/ecc31633-cfa1-48be-a059-911ac36939b5" /> 
+<img width="851" height="734" alt="image" src="https://github.com/user-attachments/assets/85d55d25-9706-46a4-b151-54164c97e281" />
 
 ## 6  GRAFANA DASHBOARD 
-<img width="856" height="893" alt="image" src="https://github.com/user-attachments/assets/ecc31633-cfa1-48be-a059-911ac36939b5" /> 
+<img width="856" height="897" alt="image" src="https://github.com/user-attachments/assets/699d9879-be8c-4a9f-b8d1-24fd1102526a" />
+
  
 
 
