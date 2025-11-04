@@ -32,9 +32,6 @@ lành đức mạnh-k215480106108
 
 <img width="851" height="734" alt="image" src="https://github.com/user-attachments/assets/85d55d25-9706-46a4-b151-54164c97e281" />
 
-## 6  GRAFANA DASHBOARD 
-
-<img width="856" height="897" alt="image" src="https://github.com/user-attachments/assets/699d9879-be8c-4a9f-b8d1-24fd1102526a" />
 
  
 
