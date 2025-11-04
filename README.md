@@ -15,6 +15,8 @@ lành đức mạnh-k215480106108
 ### 1.4 Sử dụng 1 file docker-compose.yml để cài đặt các docker container
 <img width="1853" height="990" alt="image" src="https://github.com/user-attachments/assets/d0c677ab-03ee-4e40-a916-0ef041c4b966" /> 
 
+<img width="1853" height="745" alt="image" src="https://github.com/user-attachments/assets/c50860f4-b98b-425e-9d3b-557c41477d2b" />
+
 ## 2 TẠO THƯ MỤC & FILE  
 <img width="1217" height="707" alt="image" src="https://github.com/user-attachments/assets/ab7067ce-7371-4e09-9981-f8f14ec48593" /> 
 
