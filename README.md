@@ -36,7 +36,8 @@ lành đức mạnh-k215480106108
 
 ## 4 FRONTEND (index.html) 
 ### 4.1 Tạo file /web/index.html: 
-<img width="1081" height="759" alt="image" src="https://github.com/user-attachments/assets/08c32313-918b-437c-b6d0-b19dd0946bb7" />
+<img width="1081" height="759" alt="image" src="https://github.com/user-attachments/assets/08c32313-918b-437c-b6d0-b19dd0946bb7" /> 
+
 ### 4.2 Giao diện web hiển thị nhiệt độ/độ ẩm 
 <img width="1450" height="888" alt="image" src="https://github.com/user-attachments/assets/f336ab07-0dc1-4004-9632-5ed041ccdf71" /> 
 
